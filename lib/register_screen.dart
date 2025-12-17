@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'view_details_screen.dart';
 
 class RegisterScreen extends StatelessWidget {
   @override
