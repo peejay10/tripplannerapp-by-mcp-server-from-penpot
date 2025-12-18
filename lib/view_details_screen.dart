@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'booking_summary_screen.dart'; // <--- Import หน้าสรุปการจอง
 
 class ViewDetailsScreen extends StatelessWidget {
   @override
@@ -91,9 +92,9 @@ class ViewDetailsScreen extends StatelessWidget {
                     clipBehavior: Clip.none, // เพื่อให้เงาไม่ถูกตัด
                     child: Row(
                       children: [
-                        _buildDateCard('15-20 oct 2026', '฿10,000'),
-                        _buildDateCard('25-30 oct 2026', '฿10,000'),
-                        _buildDateCard('26-1 sep 2026', '฿15,000'),
+                        _buildDateCard(context, '15-20 oct 2026', '฿10,000'),
+                        _buildDateCard(context, '25-30 oct 2026', '฿10,000'),
+                        _buildDateCard(context, '26-1 sep 2026', '฿15,000'),
                       ],
                     ),
                   ),
@@ -133,8 +134,8 @@ class ViewDetailsScreen extends StatelessWidget {
     );
   }
 
-  // Widget สร้างการ์ดวันที่ (Date Card)
-  Widget _buildDateCard(String date, String price) {
+  // Widget สร้างการ์ดวันที่ (Date Card) - เพิ่ม context เพื่อใช้ Navigator
+  Widget _buildDateCard(BuildContext context, String date, String price) {
     return Container(
       width: 130,
       margin: const EdgeInsets.only(right: 12),
@@ -158,17 +159,34 @@ class ViewDetailsScreen extends StatelessWidget {
           const SizedBox(height: 4),
           Text(price, style: const TextStyle(fontSize: 14)),
           const SizedBox(height: 8),
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.symmetric(vertical: 6),
-            decoration: BoxDecoration(
-              color: const Color(0xFFFF94C6), // สีชมพู
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: const Center(
-              child: Text(
-                'booking',
-                style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold),
+          
+          // ปุ่ม Booking สีชมพู (เชื่อมต่อแล้ว)
+          InkWell(
+            onTap: () {
+               // เมื่อกดแล้ว ส่งข้อมูลไปหน้า Booking Summary
+               Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BookingSummaryScreen(
+                    tripName: 'Parisian Dreams', 
+                    date: date,    // ส่งวันที่จากการ์ดนี้
+                    priceStr: price, // ส่งราคาจากการ์ดนี้
+                  ),
+                ),
+              );
+            },
+            child: Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(vertical: 6),
+              decoration: BoxDecoration(
+                color: const Color(0xFFFF94C6), // สีชมพู
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: const Center(
+                child: Text(
+                  'booking',
+                  style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold),
+                ),
               ),
             ),
           )

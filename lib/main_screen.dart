@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'view_details_screen.dart';
 import 'profile_screen.dart'; 
+import 'my_trips_screen.dart'; // <--- เพิ่มบรรทัดนี้
 
 class MainScreen extends StatefulWidget {
   @override
@@ -14,7 +15,7 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _pages = [
     HomeContent(),       // หน้า 0: Home (เราแยก Widget ออกมาด้านล่าง)
     PlaceholderWidget(text: 'Companies Page'), // หน้า 1: Companies (ยังไม่ได้ทำ)
-    PlaceholderWidget(text: 'My Trips Page'),  // หน้า 2: My Trips (ยังไม่ได้ทำ)
+    MyTripsScreen(),  // หน้า 2: My Trips (ยังไม่ได้ทำ)
     ProfileScreen(),     // หน้า 3: Profile (ที่เราเพิ่งทำเสร็จ)
   ];
 
